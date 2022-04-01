@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="36dp"
+    android:background="?attr/colorItemBackground1">
+
+    <TextView
+        android:id="@+id/materialName"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="start|center_vertical"
+        android:padding="4dp"
+        android:text="@string/material_name_placeholder"
+        android:textColor="?attr/colorOnBackground" />
+
+    <TextView
+        android:id="@+id/materialQuantity"
+        android:layout_width="@dimen/quantity_col_width"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="@string/quantity_placeholder"
+        android:textColor="?attr/colorOnBackground" />
+</LinearLayout>
