@@ -14,4 +14,6 @@
     <string name="quantity_placeholder">x999</string>
     <string name="material_name_placeholder">Material name placeholder</string>
     <string name="add_products_from_warehouse">Dodaj produkty\n z magazynu</string>
+    <string name="search_hint">Wyszukaj…</string>
+    <string name="price_placeholder">999zł / szt</string>
 </resources>
