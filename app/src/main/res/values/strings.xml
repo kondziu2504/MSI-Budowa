@@ -20,4 +20,5 @@
     <string name="text_placeholder_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit dolor sed mi condimentum bibendum. Etiam sed arcu at est elementum molestie vitae eu metus. Nulla sem leo, tincidunt eget risus eu, commodo vestibulum augue. Nullam venenatis mauris metus, at porta odio tincidunt at. Ut ac arcu eu mi porta tincidunt. Etiam lobortis magna vel nulla molestie, ut fermentum eros suscipit. Nam commodo, lectus sed tempor pellentesque, turpis dolor mattis mi, vel dignissim leo lorem at arcu.</string>
     <string name="color">Kolor</string>
     <string name="add">Dodaj</string>
+    <string name="price">Cena</string>
 </resources>
