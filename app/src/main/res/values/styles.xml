@@ -1,0 +1,11 @@
+<resources>
+<!--
+    <style name="Theme.MSIBudowa.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="Theme.MSIBudowa.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="Theme.MSIBudowa.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
+</resources>
