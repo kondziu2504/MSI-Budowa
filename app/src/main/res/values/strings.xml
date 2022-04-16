@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">MSI-Budowa</string>
+    <string name="action_settings">Settings</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="materials">Materiały</string>
+    <string name="quantity">Ilość</string>
+    <string name="quantity_placeholder">x999</string>
+    <string name="material_name_placeholder">Material name placeholder</string>
+    <string name="add_products_from_warehouse">Dodaj produkty\n z magazynu</string>
+    <string name="search_hint">Wyszukaj…</string>
+    <string name="price_placeholder">999zł / szt</string>
+    <string name="description">Opis</string>
+    <string name="text_placeholder_paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit dolor sed mi condimentum bibendum. Etiam sed arcu at est elementum molestie vitae eu metus. Nulla sem leo, tincidunt eget risus eu, commodo vestibulum augue. Nullam venenatis mauris metus, at porta odio tincidunt at. Ut ac arcu eu mi porta tincidunt. Etiam lobortis magna vel nulla molestie, ut fermentum eros suscipit. Nam commodo, lectus sed tempor pellentesque, turpis dolor mattis mi, vel dignissim leo lorem at arcu.</string>
+    <string name="color">Kolor</string>
+    <string name="add">Dodaj</string>
+    <string name="price">Cena</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_warehouse_test">WarehouseActivityTest</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

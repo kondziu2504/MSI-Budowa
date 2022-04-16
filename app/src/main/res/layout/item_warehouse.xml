@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="product"
+            type="com.example.msi_budowa.common.Product" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:background="?attr/colorItemBackground1"
+        android:padding="4dp">
+
+        <ImageView
+            android:id="@+id/productIcon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:background="#BABABA"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:id="@+id/productName"
+            android:layout_width="67dp"
+            android:layout_height="match_parent"
+            android:layout_weight="23"
+            android:gravity="start|center_vertical"
+            android:paddingStart="4dp"
+            android:text="@{product.name, default = @string/material_name_placeholder}"
+            android:textColor="?attr/colorOnBackground"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="@dimen/quantity_col_width"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:gravity="center"
+            android:text="@{String.valueOf(product.price.value) + ` zł / ` + product.price.priceType.stringValue, default = @string/price_placeholder}"
+            android:textColor="?attr/colorOnBackground"
+            android:textStyle="bold" />
+    </LinearLayout>
+</layout>
