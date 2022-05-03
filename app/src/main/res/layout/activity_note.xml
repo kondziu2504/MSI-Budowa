@@ -12,11 +12,19 @@
     app:layout_constraintTop_toTopOf="parent"
     tools:context=".orders.OrderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <include layout="@layout/item_note" />
+
+    <EditText
+        android:id="@+id/noteTitlePT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/note_title"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:autofillHints="" />
 
     <TextView
-        android:id="@+id/orderDescriptionNameTV"
+        android:id="@+id/noteDescriptionNameTV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -24,12 +32,16 @@
         android:textColor="?attr/colorOnBackground"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView5"
+    <EditText
+        android:id="@+id/noteDescriptionPT"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/text_placeholder_paragraph"
-        android:textColor="?attr/colorOnBackground" />
+        android:layout_height="170dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/description"
+        android:inputType="textMultiLine"
+        tools:ignore="DuplicateSpeakableTextCheck"
+        android:importantForAutofill="no" />
 
 </LinearLayout>
 

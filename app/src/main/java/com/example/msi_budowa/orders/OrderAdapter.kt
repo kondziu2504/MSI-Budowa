@@ -1,12 +1,24 @@
 package com.example.msi_budowa.orders
 
 import android.content.Context
+import android.content.Intent
+import android.location.Geocoder
+import android.net.Uri
+import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.TextView
 import com.example.msi_budowa.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import java.io.IOException
+import java.lang.reflect.InvocationTargetException
+import java.util.*
 
 class OrderAdapter(private val context: Context,
                    private val dataSource: List<Order>) : BaseAdapter(){
@@ -33,23 +45,30 @@ class OrderAdapter(private val context: Context,
         val statusTextView = rowView.findViewById(R.id.orderStatusTV) as TextView
         val nameTextView = rowView.findViewById(R.id.orderOrderingNameTV) as TextView
         val addressTextView = rowView.findViewById(R.id.orderAddressTV) as TextView
+        val mapButton = rowView.findViewById(R.id.orderMapB) as Button
 
         val order = getItem(p0) as Order
         titleTextView.text = order.title
-        statusTextView.text = context.getResources().getString(order.status.idValue)
-
-        if(order.status == OrderStatus.NotStarted){
-            statusTextView.setTextColor(context.getResources().getColor(R.color.order_status_not_started))
-        }
-        else if(order.status == OrderStatus.InProcess){
-            statusTextView.setTextColor(context.getResources().getColor(R.color.order_status_in_process))
-        }
+        OrderLogic.fillStatusTextView(statusTextView, context, order)
 
         nameTextView.text = order.orderingName
         addressTextView.text = order.address
 
+        OrderLogic.addMapButtonListener(mapButton, context, order)
+
+        rowView.setOnClickListener { openOrder(order) }
+
         return rowView
     }
 
+    private fun openOrder(order : Order){
+        var intent = Intent(context, OrderActivity::class.java)
+        var bundle = Bundle()
+
+        bundle.putParcelable("Order", order)
+        intent.putExtras(bundle)
+
+        context.startActivity(intent)
+    }
 
 }

@@ -11,6 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MSIBudowa">
         <activity
+            android:name=".orders.OrderActivity"
+            android:exported="false" />
+        <activity
             android:name=".notes.NoteActivity"
             android:exported="false" />
         <activity

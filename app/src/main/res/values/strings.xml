@@ -33,4 +33,5 @@
     <string name="order_notes_button">Notatki</string>
     <string name="order_products_button">Produkty</string>
     <string name="order_summary_button">Podsumowanie</string>
+    <string name="note_title">Tytuł notatki</string>
 </resources>

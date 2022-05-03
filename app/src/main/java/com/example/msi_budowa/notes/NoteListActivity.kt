@@ -4,13 +4,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
 import com.example.msi_budowa.R
-import com.example.msi_budowa.orders.Order
-import com.example.msi_budowa.orders.OrderAdapter
-import com.example.msi_budowa.orders.OrderStatus
 
 class NoteListActivity : AppCompatActivity() {
 
     private lateinit var listView: ListView
+    private var orderId : Long = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,13 +16,21 @@ class NoteListActivity : AppCompatActivity() {
 
         listView = findViewById<ListView>(R.id.noteListLV)
 
-        val noteList = listOf(
-            Note("Notatka a", "b"),
-            Note("Notatka b", "b"),
-            Note("Notatka c", "b")
-        )
+        val bundle = intent.extras
+        if (bundle != null) {
+            orderId = bundle.getLong("OrderId")
+        }
+
+        val noteList = loadNotes(orderId)
 
         val adapter = NoteAdapter(this, noteList)
         listView.adapter = adapter
+    }
+
+    private fun loadNotes(orderId : Long) : List<Note>{
+        return listOf(
+            Note(orderId, 1, "Notatka a" + orderId, "b"),
+            Note(orderId, 2, "Notatka b" + orderId, "b"),
+            Note(orderId, 3, "Notatka c" + orderId, "b"))
     }
 }
