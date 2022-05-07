@@ -20,6 +20,9 @@
             android:name=".notes.NoteListActivity"
             android:exported="false" />
         <activity
+            android:name=".building_products.ProductsListActivity"
+            android:exported="false"/>
+        <activity
             android:name=".orders.OrderListActivity"
             android:exported="true">
             <intent-filter>
@@ -29,7 +32,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".warehouse.WarehouseTestActivity"
+            android:name=".warehouse.WarehouseActivity"
             android:exported="true"
             android:label="@string/title_activity_warehouse_test"
             android:theme="@style/Theme.MSIBudowa.NoActionBar" />

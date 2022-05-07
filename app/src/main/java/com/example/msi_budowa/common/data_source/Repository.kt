@@ -2,6 +2,7 @@ package com.example.msi_budowa.common.data_source
 
 import com.example.msi_budowa.common.CategoryTree
 import com.example.msi_budowa.common.Product
+import com.example.msi_budowa.orders.Order
 
 object Repository {
 
@@ -13,5 +14,9 @@ object Repository {
 
     fun GetCategories(onSuccess: (CategoryTree) -> Unit){
         return dataSource.GetCategories(onSuccess)
+    }
+
+    fun GetOrders(onSuccess: (List<Order>) -> Unit) {
+        return dataSource.GetOrders(onSuccess)
     }
 }

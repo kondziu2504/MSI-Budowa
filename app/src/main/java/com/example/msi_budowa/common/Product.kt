@@ -3,6 +3,7 @@ package com.example.msi_budowa.common
 import android.media.Image
 
 data class Product (
+    val id : Long,
     val name : String,
     val price: Price,
     val description : String,

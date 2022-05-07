@@ -8,6 +8,8 @@ import android.widget.*
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.msi_budowa.R
 import com.example.msi_budowa.databinding.ItemWarehouseBinding
 import com.example.msi_budowa.common.CategoryTree
@@ -69,9 +71,11 @@ class WarehouseFragment : Fragment(), AdapterView.OnItemSelectedListener
     private fun UpdateLayoutItems(container: ViewGroup?, products : List<Product>){
         itemsLayout.removeAllViews()
         products.forEach { item ->
-            val itemView = ItemWarehouseBinding.inflate(layoutInflater, itemsLayout, false)
+            val itemView = ItemWarehouseBinding.inflate(layoutInflater, itemsLayout, true)
             itemView.product = item
-            itemsLayout.addView(itemView.root)
+            itemView.root.setOnClickListener{
+                findNavController().navigate(R.id.action_warehouseFragment_to_productDetailsFragment)
+            }
         }
     }
 

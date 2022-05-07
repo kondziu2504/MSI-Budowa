@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".building_products.ProductsListFragment"
+    android:background="@android:color/holo_red_dark"
     app:defaultNavHost="true"
-    app:navGraph="@navigation/warehouse_nav_graph" >
+    app:navGraph="@navigation/warehouse_nav_graph"
+    tools:context=".building_products.ProductsListActivity">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -52,6 +53,7 @@
             tools:ignore="SpeakableTextPresentCheck">
 
             <LinearLayout
+                android:id="@+id/productsListLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -77,7 +79,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/warehouseButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

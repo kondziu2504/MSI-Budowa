@@ -3,10 +3,10 @@ package com.example.msi_budowa.orders
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.msi_budowa.R
+import com.example.msi_budowa.building_products.ProductsListActivity
 import com.example.msi_budowa.notes.NoteListActivity
 
 class OrderActivity : AppCompatActivity() {
@@ -25,6 +25,7 @@ class OrderActivity : AppCompatActivity() {
         val mapButton = findViewById<Button>(R.id.orderMapB)
 
         val notesButton = findViewById<Button>(R.id.orderNotesB)
+        val productsButton = findViewById<Button>(R.id.orderProductsB)
 
         val bundle = intent.extras
         val order = bundle?.getParcelable<Order>("Order") as Order
@@ -38,13 +39,19 @@ class OrderActivity : AppCompatActivity() {
 
         OrderLogic.addMapButtonListener(mapButton, this, order)
         notesButton.setOnClickListener { openNotesList() }
-
+        productsButton.setOnClickListener{ openProductsList() }
     }
 
     private fun openNotesList(){
         var intent = Intent(this, NoteListActivity::class.java)
         intent.putExtra("OrderId", orderId)
 
+        startActivity(intent)
+    }
+
+    private fun openProductsList(){
+        var intent = Intent(this, ProductsListActivity::class.java)
+        intent.putExtra("OrderId", orderId)
         startActivity(intent)
     }
 }
