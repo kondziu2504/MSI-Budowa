@@ -1,6 +1,10 @@
 package com.example.msi_budowa.common
 
-data class ProductCategory(val name : String){
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class ProductCategory(val name : String) : Parcelable {
     override fun equals(other: Any?): Boolean {
         if(!(other is ProductCategory?))
             return false

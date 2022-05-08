@@ -46,6 +46,7 @@ class ProductsListActivity : AppCompatActivity(){
 
     private fun openWarehouse(){
         var intent = Intent(this, WarehouseActivity::class.java)
+        intent.putExtra("order", order)
         startActivity(intent)
     }
 

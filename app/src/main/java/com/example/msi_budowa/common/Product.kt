@@ -1,6 +1,8 @@
 package com.example.msi_budowa.common
 
 import android.media.Image
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 data class Product (
     val id : Long,

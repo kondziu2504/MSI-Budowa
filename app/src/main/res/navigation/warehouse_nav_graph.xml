@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/productDetailsFragment"
-        android:name="com.example.msi_budowa.warehouse.WarehouseItemFragment"
+        android:name="com.example.msi_budowa.warehouse.WarehouseDetailsFragment"
         android:label="fragment_product_details"
         tools:layout="@layout/fragment_warehouse_item_details" />
 </navigation>

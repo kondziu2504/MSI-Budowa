@@ -9,14 +9,18 @@ object Repository {
     private val dataSource : IDataSource = MockDataSource()
 
     fun GetWarehouseItems(onSuccess: (List<Product>) -> Unit){
-        return dataSource.GetWarehouseItems(onSuccess)
+        dataSource.GetWarehouseItems(onSuccess)
     }
 
     fun GetCategories(onSuccess: (CategoryTree) -> Unit){
-        return dataSource.GetCategories(onSuccess)
+        dataSource.GetCategories(onSuccess)
     }
 
     fun GetOrders(onSuccess: (List<Order>) -> Unit) {
-        return dataSource.GetOrders(onSuccess)
+        dataSource.GetOrders(onSuccess)
+    }
+
+    fun UpdateOrder(newOrder : Order, onSuccess: () -> Unit, onFailure: () -> Unit){
+        onSuccess()
     }
 }

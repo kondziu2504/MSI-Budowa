@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -74,7 +75,8 @@ class WarehouseFragment : Fragment(), AdapterView.OnItemSelectedListener
             val itemView = ItemWarehouseBinding.inflate(layoutInflater, itemsLayout, true)
             itemView.product = item
             itemView.root.setOnClickListener{
-                findNavController().navigate(R.id.action_warehouseFragment_to_productDetailsFragment)
+                val bundle = bundleOf("productId" to item.id)
+                findNavController().navigate(R.id.action_warehouseFragment_to_productDetailsFragment, bundle)
             }
         }
     }

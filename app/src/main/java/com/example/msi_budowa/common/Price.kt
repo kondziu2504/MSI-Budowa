@@ -1,5 +1,7 @@
 package com.example.msi_budowa.common
 
-data class Price(val value : Float, val priceType: PriceType){
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
-}
+@Parcelize
+data class Price(val value : Float, val priceType: PriceType) : Parcelable

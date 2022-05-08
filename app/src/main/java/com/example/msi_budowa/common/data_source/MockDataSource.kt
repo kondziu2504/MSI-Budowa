@@ -62,15 +62,15 @@ class MockDataSource : IDataSource {
                 Order(1,"a", "b",
                     "Pasaż Grunwaldzki, Wrocław",
                     OrderStatus.InProcess, "d",
-                    mapOf(Pair(0, 52), Pair(1, 423), Pair(2, 3))
+                    mutableMapOf(Pair(0, 52), Pair(1, 423), Pair(2, 3))
                 ),
                 Order(2, "Tytuł zlecenia", "Jacek Jędruszek",
                     "osiedle Korczak, Kalisz", OrderStatus.InProcess,
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut suscipit dolor sed mi condimentum bibendum. Etiam sed arcu at est elementum molestie vitae eu metus. Nulla sem leo, tincidunt eget risus eu, commodo vestibulum augue. Nullam venenatis mauris metus, at porta odio tincidunt at. Ut ac arcu eu mi porta tincidunt. Etiam lobortis magna vel nulla molestie, ut fermentum eros suscipit. Nam commodo, lectus sed tempor pellentesque, turpis dolor mattis mi, vel dignissim leo lorem at arcu.",
-                    mapOf(Pair(0, 512), Pair(2, 33))),
+                    mutableMapOf(Pair(0, 512), Pair(2, 33))),
                 Order(3, "Remont kuchni", "Konrad Stręk",
                     "Cicha 5, Pleszew", OrderStatus.NotStarted,
-                    "Położyć nowe płytki", mapOf(Pair(1, 423), Pair(2, 433)))
+                    "Położyć nowe płytki", mutableMapOf(Pair(1, 423), Pair(2, 433)))
             )
 
         onSuccess(orders)
