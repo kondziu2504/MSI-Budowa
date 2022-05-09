@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.coroutineScope
 import com.example.msi_budowa.R
 import com.example.msi_budowa.common.Product
 import com.example.msi_budowa.common.data_source.Repository
 import com.example.msi_budowa.databinding.ItemProductsListBinding
 import com.example.msi_budowa.orders.Order
 import com.example.msi_budowa.warehouse.WarehouseActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ProductsListActivity : AppCompatActivity(){
 
@@ -31,17 +35,28 @@ class ProductsListActivity : AppCompatActivity(){
 
         warehouseButton.setOnClickListener{ openWarehouse() }
 
-        Repository.GetWarehouseItems { items ->
-            products = items
-            showProducts()
+        lifecycle.coroutineScope.launch{
+            withContext(Dispatchers.IO){
+                Repository.GetWarehouseItems { items ->
+                    launch { withContext(Dispatchers.Main){
+                        products = items
+                        showProducts()
+                    } }
+                }
+            }
         }
 
-        Repository.GetOrders { orders ->
-            this.orders = orders
-            order = orders.find { order -> order.id == intent.getLongExtra("OrderId", -1)}
-            showProducts()
+        lifecycle.coroutineScope.launch {
+            withContext(Dispatchers.IO) {
+                Repository.GetOrders { orders ->
+                    launch { withContext(Dispatchers.Main) {
+                        this@ProductsListActivity.orders = orders
+                        order = orders.find { order -> order.id == intent.getLongExtra("OrderId", -1) }
+                        showProducts()
+                    } }
+                }
+            }
         }
-
     }
 
     private fun openWarehouse(){

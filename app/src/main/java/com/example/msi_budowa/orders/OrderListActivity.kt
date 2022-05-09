@@ -3,8 +3,12 @@ package com.example.msi_budowa.orders
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import androidx.lifecycle.coroutineScope
 import com.example.msi_budowa.R
 import com.example.msi_budowa.common.data_source.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class OrderListActivity : AppCompatActivity() {
 
@@ -22,9 +26,17 @@ class OrderListActivity : AppCompatActivity() {
 
 
     private fun loadOrders() {
-        return Repository.GetOrders { orders ->
-            val adapter = OrderAdapter(this, orders)
-            listView.adapter = adapter
+        lifecycle.coroutineScope.launch {
+            withContext(Dispatchers.IO){
+                Repository.GetOrders { orders ->
+                    val adapter = OrderAdapter(this@OrderListActivity, orders)
+                    lifecycle.coroutineScope.launch{
+                        withContext(Dispatchers.Main){
+                            listView.adapter = adapter
+                        }
+                    }
+                }
+            }
         }
     }
 }

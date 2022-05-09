@@ -3,10 +3,14 @@ package com.example.msi_budowa.warehouse
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.msi_budowa.common.CategoryTree
 import com.example.msi_budowa.common.Product
 import com.example.msi_budowa.common.ProductCategory
 import com.example.msi_budowa.common.data_source.Repository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class WarehouseViewModel : ViewModel() {
     val DisplayedProducts : LiveData<List<Product>>  get() = displayedProducts
@@ -43,16 +47,24 @@ class WarehouseViewModel : ViewModel() {
     }
 
     private fun LoadAllProducts(){
-        Repository.GetWarehouseItems {
-            products -> allProducts = products
-            UpdateDisplayedProducts()
+        viewModelScope.launch { withContext(Dispatchers.IO) {
+            Repository.GetWarehouseItems { products ->
+                launch { withContext(Dispatchers.Main) {
+                    allProducts = products
+                    UpdateDisplayedProducts()
+                }}
+            }}
         }
     }
 
     private fun LoadCategories(){
-        Repository.GetCategories { categoryTree ->
-            this.categoryTree.value = categoryTree
-        }
+        viewModelScope.launch { withContext(Dispatchers.IO){
+            Repository.GetCategories { categoryTree ->
+                launch { withContext(Dispatchers.Main) {
+                    this@WarehouseViewModel.categoryTree.value = categoryTree
+                }}
+            }
+        }}
     }
 
     private fun UpdateDisplayedProducts(){

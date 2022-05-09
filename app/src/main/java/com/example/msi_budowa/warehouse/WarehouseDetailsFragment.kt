@@ -10,12 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.AppCompatImageButton
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
 import com.example.msi_budowa.R
 import com.example.msi_budowa.common.Product
 import com.example.msi_budowa.common.data_source.Repository
 import com.example.msi_budowa.databinding.FragmentWarehouseItemDetailsBinding
 import com.example.msi_budowa.orders.Order
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlin.math.max
 
 class WarehouseDetailsFragment : Fragment() {
@@ -66,19 +70,25 @@ class WarehouseDetailsFragment : Fragment() {
             else
                 newOrder.products[product!!.id] = newOrder.products[product!!.id]!! + chosenAmount
 
-            Repository.UpdateOrder(
-                newOrder,
-                onSuccess = { Snackbar.make(requireView(), "Dodano materiały", Snackbar.LENGTH_SHORT).show()},
-                onFailure = { Snackbar.make(requireView(), "Nie udało się zaktualizować materiałów", Snackbar.LENGTH_SHORT).show()}
-            )
+            lifecycle.coroutineScope.launch { withContext(Dispatchers.IO) {
+                Repository.UpdateOrder(
+                    newOrder,
+                    onSuccess = { Snackbar.make(requireView(), "Dodano materiały", Snackbar.LENGTH_SHORT).show()},
+                    onFailure = { Snackbar.make(requireView(), "Nie udało się zaktualizować materiałów", Snackbar.LENGTH_SHORT).show()}
+                )
+            } }
         }
 
         val productId = requireArguments().getLong("productId")
 
-        Repository.GetWarehouseItems { items ->
-            product = items.find { item -> item.id == productId }
-            binding.product = product
-        }
+        lifecycle.coroutineScope.launch{ withContext(Dispatchers.IO) {
+            Repository.GetWarehouseItems { items ->
+                launch { withContext(Dispatchers.Main) {
+                    product = items.find { item -> item.id == productId }
+                    binding.product = product
+                } }
+            }
+        } }
 
         return view
     }

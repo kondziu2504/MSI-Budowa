@@ -75,4 +75,8 @@ class MockDataSource : IDataSource {
 
         onSuccess(orders)
     }
+
+    override fun UpdateOrder(onSuccess: () -> Unit, onFailure: () -> Unit) {
+        onSuccess()
+    }
 }

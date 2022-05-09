@@ -102,6 +102,9 @@ class WarehouseFragment : Fragment(), AdapterView.OnItemSelectedListener
     }
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
+        if(model.CategoryTree.value == null)
+            return
+
         if(parent == categoryComboBox){
             if(parent.adapter != null){
                 val chosenCategory = parent.getItemAtPosition(pos) as ProductCategory
