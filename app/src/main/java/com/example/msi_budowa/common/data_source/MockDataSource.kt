@@ -3,6 +3,7 @@ package com.example.msi_budowa.common.data_source
 import com.example.msi_budowa.App
 import com.example.msi_budowa.R
 import com.example.msi_budowa.common.*
+import com.example.msi_budowa.notes.Note
 import com.example.msi_budowa.orders.Order
 import com.example.msi_budowa.orders.OrderStatus
 
@@ -74,6 +75,14 @@ class MockDataSource : IDataSource {
             )
 
         onSuccess(orders)
+    }
+
+    override fun GetNotes(orderId: Long, onSuccess: (List<Note>) -> Unit) {
+        TODO("Not yet implemented")
+    }
+
+    override fun GetNote(noteId: Long, onSuccess: (Note) -> Unit) {
+        TODO("Not yet implemented")
     }
 
     override fun UpdateOrder(onSuccess: () -> Unit, onFailure: () -> Unit) {

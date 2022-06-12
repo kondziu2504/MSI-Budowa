@@ -1,6 +1,7 @@
 package com.example.msi_budowa.common.data_source.server
 
 import com.example.msi_budowa.common.*
+import com.example.msi_budowa.notes.Note
 import com.example.msi_budowa.orders.Order
 import com.example.msi_budowa.orders.OrderStatus
 import com.google.gson.*
@@ -18,6 +19,15 @@ class OrderDeserializer : JsonDeserializer<Order> {
             return OrderStatus.NotStarted
     }
 
+    private fun orderStatusFromInt(statusStr : Int) : OrderStatus {
+        if(statusStr == 2)
+            return OrderStatus.InProcess
+        else if(statusStr == 1)
+            return OrderStatus.NotStarted
+        else
+            return OrderStatus.NotStarted
+    }
+
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
@@ -29,12 +39,30 @@ class OrderDeserializer : JsonDeserializer<Order> {
         val title: String? = orderJson.get("title").asString
         val orderingName: String? = orderJson.get("name").asString
         val address: String? = orderJson.get("address").asString
-        val status: OrderStatus = orderStatusFromString(orderJson.get("status").asString)
+        val status: OrderStatus = orderStatusFromInt(orderJson.get("status").asInt)
         val description: String? = orderJson.get("description").asString
         val mapType = object : TypeToken<MutableMap<Long, Int>>() {}.type
         val products : MutableMap<Long, Int> = GsonBuilder().create().fromJson(orderJson.get("products"), mapType)
 
         return Order(id, title, orderingName, address, status, description, products)
+    }
+}
+
+class NoteDeserializer : JsonDeserializer<Note> {
+
+    override fun deserialize(
+        json: JsonElement?,
+        typeOfT: Type?,
+        context: JsonDeserializationContext?
+    ): Note {
+        val orderJson = json!!.asJsonObject
+
+        val orderId: Long = orderJson.get("orderId").asLong
+        val noteId: Long = orderJson.get("noteId").asLong
+        val title: String? = orderJson.get("title").asString
+        val description: String? = orderJson.get("description").asString
+
+        return Note(orderId, noteId, title, description)
     }
 }
 
@@ -54,6 +82,15 @@ class PriceTypeDeserializer() : JsonDeserializer<PriceType>{
 }
 
 class PriceDeserializer() : JsonDeserializer<Price>{
+    private fun priceTypeFromInt(priceType : Int) : PriceType {
+        if(priceType == 0)
+            return PriceType.PerItem
+        else if(priceType == 1)
+            return PriceType.PerMeter2
+        else
+            return PriceType.PerItem
+    }
+
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
@@ -61,8 +98,8 @@ class PriceDeserializer() : JsonDeserializer<Price>{
     ): Price {
         val jsonObj = json!!.asJsonObject
 
-        val priceValue = jsonObj.get("value").asFloat
-        val priceType = PriceTypeDeserializer().deserialize(jsonObj.get("type"), null, null)
+        val priceValue = jsonObj.get("priceValue").asFloat
+        val priceType = priceTypeFromInt(jsonObj.get("priceType").asInt)
 
         return Price(priceValue, priceType)
     }
@@ -77,12 +114,12 @@ class ProductDeserializer() : JsonDeserializer<Product>{
     ): Product {
         val jsonObj = json!!.asJsonObject
 
-        val id = jsonObj.get("id").asLong
+        val id = jsonObj.get("productId").asLong
         val name = jsonObj.get("name").asString
         val price = PriceDeserializer().deserialize(jsonObj.get("price"), null, null)
         val description = jsonObj.get("description").asString
-        val category = ProductCategory(jsonObj.get("category").asString)
-        val subCategory = ProductCategory(jsonObj.get("subCategory").asString)
+        val category = null//ProductCategory(jsonObj.get("category").asString)
+        val subCategory = null//ProductCategory(jsonObj.get("subCategory").asString)
 
         return Product(id, name, price, description, category, subCategory)
     }

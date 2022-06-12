@@ -3,6 +3,7 @@ package com.example.msi_budowa.common.data_source.server
 import com.example.msi_budowa.common.CategoryTree
 import com.example.msi_budowa.common.Product
 import com.example.msi_budowa.common.data_source.IDataSource
+import com.example.msi_budowa.notes.Note
 import com.example.msi_budowa.orders.Order
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
@@ -17,6 +18,7 @@ class ServerDataSource(val address : String) : IDataSource {
         val gson = GsonBuilder()
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .registerTypeAdapter(Order::class.java, OrderDeserializer())
+            .registerTypeAdapter(Note::class.java, NoteDeserializer())
             .registerTypeAdapter(Product::class.java, ProductDeserializer())
             .registerTypeAdapter(CategoryTree::class.java, CategoryTreeDeserializer())
             .create()
@@ -43,6 +45,18 @@ class ServerDataSource(val address : String) : IDataSource {
 
     override fun GetOrders(onSuccess: (List<Order>) -> Unit) {
         val response = service.GetOrders().execute()
+        if(response.isSuccessful)
+            onSuccess(response.body()!!)
+    }
+
+    override fun GetNotes(orderId : Long, onSuccess: (List<Note>) -> Unit) {
+        val response = service.GetNotes(orderId).execute()
+        if(response.isSuccessful)
+            onSuccess(response.body()!!)
+    }
+
+    override fun GetNote(noteId: Long, onSuccess: (Note) -> Unit) {
+        val response = service.GetNote(noteId).execute()
         if(response.isSuccessful)
             onSuccess(response.body()!!)
     }

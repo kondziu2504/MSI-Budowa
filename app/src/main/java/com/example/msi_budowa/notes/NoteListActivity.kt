@@ -3,7 +3,13 @@ package com.example.msi_budowa.notes
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ListView
+import androidx.lifecycle.coroutineScope
 import com.example.msi_budowa.R
+import com.example.msi_budowa.common.data_source.Repository
+import com.example.msi_budowa.orders.OrderAdapter
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NoteListActivity : AppCompatActivity() {
 
@@ -21,16 +27,22 @@ class NoteListActivity : AppCompatActivity() {
             orderId = bundle.getLong("OrderId")
         }
 
-        val noteList = loadNotes(orderId)
+        loadNotes(orderId)
 
-        val adapter = NoteAdapter(this, noteList)
-        listView.adapter = adapter
     }
 
-    private fun loadNotes(orderId : Long) : List<Note>{
-        return listOf(
-            Note(orderId, 1, "Notatka a" + orderId, "b"),
-            Note(orderId, 2, "Notatka b" + orderId, "b"),
-            Note(orderId, 3, "Notatka c" + orderId, "b"))
+    private fun loadNotes(orderId : Long){
+        lifecycle.coroutineScope.launch {
+            withContext(Dispatchers.IO){
+                Repository.GetNotes(orderId) { notes ->
+                    val adapter = NoteAdapter(this@NoteListActivity, notes)
+                    lifecycle.coroutineScope.launch{
+                        withContext(Dispatchers.Main){
+                            listView.adapter = adapter
+                        }
+                    }
+                }
+            }
+        }
     }
 }
